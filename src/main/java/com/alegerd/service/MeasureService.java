@@ -1,16 +1,16 @@
 package com.alegerd.service;
 
-import com.alegerd.dao.UserDao;
+import com.alegerd.dao.MeasureDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class MeasureService {
 
     @Autowired
-    private UserDao dao;
+    private MeasureDao dao;
 
-    public void setDao(UserDao dao) {
+    public void setDao(MeasureDao dao) {
         this.dao = dao;
     }
 }
