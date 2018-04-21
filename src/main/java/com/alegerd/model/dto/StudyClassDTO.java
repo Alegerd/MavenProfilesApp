@@ -66,4 +66,5 @@ public class StudyClassDTO {
     public void setPeriodicity(Integer periodicity) {
         this.periodicity = periodicity;
     }
+
 }

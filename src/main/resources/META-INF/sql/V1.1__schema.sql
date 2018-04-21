@@ -137,5 +137,3 @@ CREATE TABLE check_in
     REFERENCES "_user",
   date           DATE   NOT NULL
 );
-
-
