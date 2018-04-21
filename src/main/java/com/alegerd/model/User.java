@@ -103,13 +103,19 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        User that = (User) o;
+        return id == that.id
+                && Objects.equals(fullName, that.fullName)
+                && Objects.equals(group, that.group)
+                && Objects.equals(role, that.role)
+                && Objects.equals(birthday, that.birthday)
+                && Objects.equals(rating, that.rating)
+                && Objects.equals(personalInfo, that.personalInfo)
+                && Objects.equals(contacts, that.contacts);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id);
+        return Objects.hash(id, fullName, group, role, birthday, rating, personalInfo, contacts);
     }
 }

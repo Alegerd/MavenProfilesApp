@@ -3,6 +3,7 @@ package com.alegerd.model;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "volume_vector")
@@ -51,5 +52,21 @@ public class VolumeVector {
 
     public void setMeasures(Collection<Measure> measures) {
         this.measures = measures;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VolumeVector that = (VolumeVector) o;
+        return id == that.id
+                && Objects.equals(room, that.room)
+                && Objects.equals(date, that.date)
+                && Objects.equals(measures, that.measures);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, room, date, measures);
     }
 }

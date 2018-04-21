@@ -2,6 +2,7 @@ package com.alegerd.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "check_in")
@@ -51,5 +52,21 @@ public class CheckIn {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CheckIn that = (CheckIn) o;
+        return id == that.id &&
+                Objects.equals(studyClass, that.studyClass)
+                && Objects.equals(student, that.student)
+                && Objects.equals(date, that.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, studyClass, student, date);
     }
 }

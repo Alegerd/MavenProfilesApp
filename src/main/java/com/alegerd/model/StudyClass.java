@@ -3,6 +3,7 @@ package com.alegerd.model;
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "study_class")
@@ -107,5 +108,25 @@ public class StudyClass {
 
     public void setGroups(Collection<Group> groups) {
         this.groups = groups;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StudyClass that = (StudyClass) o;
+        return id == that.id
+                && Objects.equals(teacher, that.teacher)
+                && Objects.equals(subject, that.subject)
+                && Objects.equals(start, that.start)
+                && Objects.equals(end, that.end)
+                && Objects.equals(periodicity, that.periodicity)
+                && Objects.equals(groups, that.groups)
+                && Objects.equals(room, that.room);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, teacher, subject, start, end, periodicity, groups, room);
     }
 }

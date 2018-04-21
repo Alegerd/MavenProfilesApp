@@ -1,6 +1,7 @@
 package com.alegerd.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "measure")
@@ -49,5 +50,21 @@ public class Measure {
 
     public void setVolumeVector(VolumeVector volumeVector) {
         this.volumeVector = volumeVector;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Measure that = (Measure) o;
+        return id == that.id
+                && Objects.equals(routerId, that.routerId)
+                && Objects.equals(volume, that.volume)
+                && Objects.equals(volumeVector, that.volumeVector);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, routerId, volumeVector, volume);
     }
 }

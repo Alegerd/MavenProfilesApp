@@ -3,6 +3,7 @@ package com.alegerd.model;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "group")
@@ -62,5 +63,22 @@ public class Group {
 
     public void setStudents(Collection<User> students) {
         this.students = students;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group that = (Group) o;
+        return id == that.id
+                && Objects.equals(name, that.name)
+                && Objects.equals(admissionDate, that.admissionDate)
+                && Objects.equals(department, that.department)
+                && Objects.equals(students, that.students);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, admissionDate, department, students);
     }
 }
