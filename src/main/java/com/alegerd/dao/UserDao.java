@@ -12,9 +12,4 @@ public class UserDao extends GenericDao<User, Integer> {
     public UserDao() {
         super(User.class);
     }
-
-    public List<User> getAll(){
-        Query query = getManager().createQuery("select u from User u");
-        return query.getResultList();
-    }
 }

@@ -2,6 +2,7 @@ package com.alegerd.model;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Collection;
 
 @Entity
 @Table(name = "study_class")
@@ -42,7 +43,7 @@ public class StudyClass {
             joinColumns = @JoinColumn(name = "study_class_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    private Iterable<Group> groups;
+    private Collection<Group> groups;
 
     public Long getId() {
         return id;
@@ -100,11 +101,11 @@ public class StudyClass {
         this.periodicity = periodicity;
     }
 
-    public Iterable<Group> getGroups() {
+    public Collection<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(Iterable<Group> groups) {
+    public void setGroups(Collection<Group> groups) {
         this.groups = groups;
     }
 }

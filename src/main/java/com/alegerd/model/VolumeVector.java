@@ -2,6 +2,7 @@ package com.alegerd.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 @Table(name = "volume_vector")
@@ -18,7 +19,7 @@ public class VolumeVector {
     private Date date;
 
     @OneToMany(mappedBy = "volumeVector")
-    private Iterable<Measure> measures;
+    private Collection<Measure> measures;
 
     public Long getId() {
         return id;
@@ -44,11 +45,11 @@ public class VolumeVector {
         this.date = date;
     }
 
-    public Iterable<Measure> getMeasures() {
+    public Collection<Measure> getMeasures() {
         return measures;
     }
 
-    public void setMeasures(Iterable<Measure> measures) {
+    public void setMeasures(Collection<Measure> measures) {
         this.measures = measures;
     }
 }

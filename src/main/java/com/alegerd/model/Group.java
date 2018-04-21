@@ -2,6 +2,7 @@ package com.alegerd.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 @Table(name = "group")
@@ -21,7 +22,7 @@ public class Group {
     private Department department;
 
     @OneToMany(mappedBy = "group")
-    private Iterable<User> students;
+    private Collection<User> students;
 
     public Long getId() {
         return id;
@@ -55,11 +56,11 @@ public class Group {
         this.department = department;
     }
 
-    public Iterable<User> getStudents() {
+    public Collection<User> getStudents() {
         return students;
     }
 
-    public void setStudents(Iterable<User> students) {
+    public void setStudents(Collection<User> students) {
         this.students = students;
     }
 }
