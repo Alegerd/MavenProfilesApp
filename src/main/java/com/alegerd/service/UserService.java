@@ -2,7 +2,7 @@ package com.alegerd.service;
 
 import com.alegerd.dao.UserDao;
 import com.alegerd.model.User;
-import com.alegerd.model.UserDto;
+import com.alegerd.model.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class UserService {
-
+/*
     @Autowired
     UserDao userDao;
 
@@ -25,5 +25,5 @@ public class UserService {
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
-    }
+    }*/
 }

@@ -1,56 +1,114 @@
 package com.alegerd.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "_user")
 public class User {
-    private String username;
-    private Integer age;
-    private Integer id;
-
     @Id
-    @GeneratedValue
-    @Column(name = "id")
-    public Integer getId() {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "full_name")
+    private String fullName;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="group")
+    private Group group;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="role")
+    private UserRole role;
+
+    @Column(name = "birthday")
+    private Date birthday;
+
+    @Column(name = "rating")
+    private Double rating;
+
+    @Column(name = "personal_info")
+    private String personalInfo;
+
+    @Column(name = "contacts")
+    private String contacts;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    @Column(name = "username")
-    public String getUsername() {
-        return username;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    @Column(name = "age")
-    public Integer getAge() {
-        return age;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public String getPersonalInfo() {
+        return personalInfo;
+    }
+
+    public void setPersonalInfo(String personalInfo) {
+        this.personalInfo = personalInfo;
+    }
+
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User that = (User) o;
-        return Objects.equals(username, that.username) &&
-                Objects.equals(age, that.age)
-                && Objects.equals(id, that.id);
+        User user = (User) o;
+        return Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, age, id);
+
+        return Objects.hash(id);
     }
 }

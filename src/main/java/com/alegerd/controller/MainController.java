@@ -1,6 +1,6 @@
 package com.alegerd.controller;
 
-import com.alegerd.model.UserDto;
+import com.alegerd.model.dto.UserDto;
 import com.alegerd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    @Autowired
+   /* @Autowired
     UserService userService;
 
     @RequestMapping(value = "/")
@@ -27,5 +27,5 @@ public class MainController {
 
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
+    }*/
 }
