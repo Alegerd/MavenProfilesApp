@@ -6,11 +6,11 @@ public class StudyClassDTO {
     private Long id;
     private UserDTO teacher;
 
-    private String room;
+    private RoomDTO room;
     private Time start;
     private Time end;
     private Integer periodicity;
-    private String subject;
+    private SubjectDTO subject;
     public Long getId() {
         return id;
     }
@@ -27,19 +27,19 @@ public class StudyClassDTO {
         this.teacher = teacher;
     }
 
-    public String getSubject() {
+    public SubjectDTO getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    public void setSubject(SubjectDTO subject) {
         this.subject = subject;
     }
 
-    public String getRoom() {
+    public RoomDTO getRoom() {
         return room;
     }
 
-    public void setRoom(String room) {
+    public void setRoom(RoomDTO room) {
         this.room = room;
     }
 
@@ -67,4 +67,17 @@ public class StudyClassDTO {
         this.periodicity = periodicity;
     }
 
+    public StudyClassDTO(){
+
+    }
+
+    public StudyClassDTO(Long id, UserDTO teacher, RoomDTO room, Time start, Time end, Integer periodicity, SubjectDTO subject) {
+        this.id = id;
+        this.teacher = teacher;
+        this.room = room;
+        this.start = start;
+        this.end = end;
+        this.periodicity = periodicity;
+        this.subject = subject;
+    }
 }

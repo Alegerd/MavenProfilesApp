@@ -1,5 +1,6 @@
 package com.alegerd.dao;
 
+import com.alegerd.dao.generic.GenericDao;
 import com.alegerd.model.User;
 import org.springframework.stereotype.Repository;
 

@@ -6,7 +6,7 @@ public class UserDTO {
     private Long id;
     private String fullName;
     private GroupDTO group;
-    private String role;
+    private UserRoleDTO role;
     private Date birthday;
     private Double rating;
     private String personalInfo;
@@ -36,11 +36,11 @@ public class UserDTO {
         this.group = group;
     }
 
-    public String getRole() {
+    public UserRoleDTO getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRoleDTO role) {
         this.role = role;
     }
 
@@ -73,6 +73,21 @@ public class UserDTO {
     }
 
     public void setContacts(String contacts) {
+        this.contacts = contacts;
+    }
+
+    public UserDTO(){
+
+    }
+
+    public UserDTO(Long id, String fullName, GroupDTO group, UserRoleDTO role, Date birthday, Double rating, String personalInfo, String contacts) {
+        this.id = id;
+        this.fullName = fullName;
+        this.group = group;
+        this.role = role;
+        this.birthday = birthday;
+        this.rating = rating;
+        this.personalInfo = personalInfo;
         this.contacts = contacts;
     }
 }

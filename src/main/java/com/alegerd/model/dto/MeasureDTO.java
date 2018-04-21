@@ -1,5 +1,7 @@
 package com.alegerd.model.dto;
 
+import com.alegerd.model.Measure;
+
 public class MeasureDTO {
     private Long id;
     private String routerId;
@@ -26,6 +28,16 @@ public class MeasureDTO {
     }
 
     public void setVolume(Double volume) {
+        this.volume = volume;
+    }
+
+    public MeasureDTO(){
+
+    }
+
+    public MeasureDTO(Long id, String routerId, Double volume) {
+        this.id = id;
+        this.routerId = routerId;
         this.volume = volume;
     }
 }

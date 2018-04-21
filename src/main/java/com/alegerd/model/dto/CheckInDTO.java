@@ -39,4 +39,15 @@ public class CheckInDTO {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public CheckInDTO(){
+
+    }
+
+    public CheckInDTO(Long id, StudyClassDTO studyClass, UserDTO student, Date date) {
+        this.id = id;
+        this.studyClass = studyClass;
+        this.student = student;
+        this.date = date;
+    }
 }
