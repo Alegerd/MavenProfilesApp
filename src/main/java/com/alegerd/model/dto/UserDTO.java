@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class UserDTO {
     private Long id;
+    private String username;
     private String fullName;
     private GroupDTO group;
     private UserRoleDTO role;
@@ -76,12 +77,21 @@ public class UserDTO {
         this.contacts = contacts;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public UserDTO(){
 
     }
 
-    public UserDTO(Long id, String fullName, GroupDTO group, UserRoleDTO role, Date birthday, Double rating, String personalInfo, String contacts) {
+    public UserDTO(Long id, String username,String fullName, GroupDTO group, UserRoleDTO role, Date birthday, Double rating, String personalInfo, String contacts) {
         this.id = id;
+        this.username = username;
         this.fullName = fullName;
         this.group = group;
         this.role = role;

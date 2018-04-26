@@ -3,6 +3,7 @@ CREATE TABLE "_user"
   id            SERIAL           NOT NULL
     CONSTRAINT "_user_pk"
     PRIMARY KEY,
+  username      VARCHAR(255)     NOT NULL,
   full_name     VARCHAR(255)     NOT NULL,
   "group"       BIGINT           NOT NULL,
   role          BIGINT           NOT NULL,

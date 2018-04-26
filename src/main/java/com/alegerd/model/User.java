@@ -12,6 +12,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "full_name")
     private String fullName;
 
@@ -99,12 +102,21 @@ public class User {
         this.contacts = contacts;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User that = (User) o;
         return id == that.id
+                && Objects.equals(username, that.username)
                 && Objects.equals(fullName, that.fullName)
                 && Objects.equals(group, that.group)
                 && Objects.equals(role, that.role)
@@ -116,6 +128,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fullName, group, role, birthday, rating, personalInfo, contacts);
+        return Objects.hash(id, username, fullName, group, role, birthday, rating, personalInfo, contacts);
     }
 }

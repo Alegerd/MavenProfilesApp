@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @RestController
 @EnableWebMvc
+@RequestMapping(value = "/api")
 public class RoomController {
 
     @Autowired
