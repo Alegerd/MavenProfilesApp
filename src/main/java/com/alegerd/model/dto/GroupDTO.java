@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class GroupDTO {
     private Long id;
+    private String name;
     private DepartmentDTO department;
     private Date admissionDate;
 
@@ -31,12 +32,21 @@ public class GroupDTO {
         this.admissionDate = admissionDate;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public GroupDTO(){
 
     }
 
-    public GroupDTO(Long id, DepartmentDTO department, Date admissionDate) {
+    public GroupDTO(Long id, String name, DepartmentDTO department, Date admissionDate) {
         this.id = id;
+        this.name = name;
         this.department = department;
         this.admissionDate = admissionDate;
     }

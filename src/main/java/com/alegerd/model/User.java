@@ -19,8 +19,8 @@ public class User {
     private String fullName;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="group")
-    private Group group;
+    @JoinColumn(name="_group")
+    private GroupEntity group;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="role")
@@ -38,6 +38,9 @@ public class User {
     @Column(name = "contacts")
     private String contacts;
 
+    @Column(name = "password")
+    private String password;
+
     public Long getId() {
         return id;
     }
@@ -54,11 +57,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public Group getGroup() {
+    public GroupEntity getGroup() {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(GroupEntity group) {
         this.group = group;
     }
 
@@ -110,6 +113,14 @@ public class User {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -123,11 +134,12 @@ public class User {
                 && Objects.equals(birthday, that.birthday)
                 && Objects.equals(rating, that.rating)
                 && Objects.equals(personalInfo, that.personalInfo)
-                && Objects.equals(contacts, that.contacts);
+                && Objects.equals(contacts, that.contacts)
+                && Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, fullName, group, role, birthday, rating, personalInfo, contacts);
+        return Objects.hash(id, username, password, fullName, group, role, birthday, rating, personalInfo, contacts);
     }
 }

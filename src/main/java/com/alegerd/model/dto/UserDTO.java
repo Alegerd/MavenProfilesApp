@@ -12,6 +12,7 @@ public class UserDTO {
     private Double rating;
     private String personalInfo;
     private String contacts;
+    private String password;
 
     public Long getId() {
         return id;
@@ -33,8 +34,8 @@ public class UserDTO {
         return group;
     }
 
-    public void setGroup(GroupDTO group) {
-        this.group = group;
+    public void setGroup(GroupDTO _group) {
+        this.group = _group;
     }
 
     public UserRoleDTO getRole() {
@@ -85,11 +86,19 @@ public class UserDTO {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public UserDTO(){
 
     }
 
-    public UserDTO(Long id, String username,String fullName, GroupDTO group, UserRoleDTO role, Date birthday, Double rating, String personalInfo, String contacts) {
+    public UserDTO(Long id, String username,String fullName, GroupDTO group, UserRoleDTO role, Date birthday, Double rating, String personalInfo, String contacts, String password) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;

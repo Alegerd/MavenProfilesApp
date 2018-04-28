@@ -6,8 +6,8 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "group")
-public class Group {
+@Table(name = "_group")
+public class GroupEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -69,7 +69,7 @@ public class Group {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Group that = (Group) o;
+        GroupEntity that = (GroupEntity) o;
         return id == that.id
                 && Objects.equals(name, that.name)
                 && Objects.equals(admissionDate, that.admissionDate)
