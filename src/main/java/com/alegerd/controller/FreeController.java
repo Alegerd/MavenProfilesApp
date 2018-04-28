@@ -9,6 +9,7 @@ import com.alegerd.service.GroupService;
 import com.alegerd.service.StudyClassService;
 import com.alegerd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -42,11 +43,14 @@ public class FreeController {
         return groupService.getAllStudentsInGroupById(groupId);
     }
 
+    /*
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
-    public String loginUser(@RequestParam String username, String password) throws WrongLoginException{
-        return userService.loginUser(username, password);
+    public ResponseEntity loginUser(@RequestParam String username, String password) throws WrongLoginException{
+        userService.loginUser(username, password);
+        return ResponseEntity.ok().build();
     }
+    */
 
     @RequestMapping(value = "/gasidoc", method = RequestMethod.GET)
     @ResponseBody
@@ -58,13 +62,5 @@ public class FreeController {
     @ResponseBody
     public List<UserDTO> getAllStudentsInDepartment(@PathVariable Long depId){
         return groupService.getAllStudentsInDepartment(depId);
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    public void setGroupService(GroupService groupService) {
-        this.groupService = groupService;
     }
 }

@@ -46,22 +46,24 @@ public class UserService {
     @Transactional
     public void addUser(UserDTO userDTO){
         User user = mapper.toEntity(userDTO);
-        user.setPassword(encoder.encode(user.getPassword()));
+        //user.setPassword(encoder.encode(user.getPassword()));
         dao.create(user);
     }
 
+    /*
     @Transactional
-    public String loginUser(String username, String password) throws WrongLoginException{
+    public void loginUser(String username, String password) throws WrongLoginException{
         UserDTO user = findUserByUsername(username);
         if(user == null) throw new WrongLoginException();
         else {
-            if(!encoder.matches(password, user.getPassword())) throw new WrongLoginException();
+            //if(!encoder.matches(password, user.getPassword())) throw new WrongLoginException();
+            if(!password.equals(user.getPassword())) throw new WrongLoginException();
             else {
                 securityService.loginUser(username, password);
-                return "auth_token";  //TODO token
             }
         }
     }
+    */
 
     @Transactional
     public UserDTO getCurrentUser() throws WrongLoginException{

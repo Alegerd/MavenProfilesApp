@@ -8,6 +8,7 @@ import com.alegerd.util.UserProvider;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
 
@@ -24,23 +25,17 @@ public class CheckInService {
 
     @Autowired
     private StudyClassService studyClassService;
+
     @Autowired
     private VolumeVectorService volumeVectorService;
 
     public enum CheckInTypes{SUCCESS, NO_CURRENT_CLASS, WRONG_ROOM}
 
-    public void setDao(CheckInDao dao) {
-        this.dao = dao;
+    public CheckInService() {
+        mapper = Mappers.getMapper(CheckInMapper.class);
     }
 
-    public void setStudyClassService(StudyClassService studyClassService) {
-        this.studyClassService = studyClassService;
-    }
-
-    public void setVolumeVectorService(VolumeVectorService volumeVectorService) {
-        this.volumeVectorService = volumeVectorService;
-    }
-
+    @Transactional
     public CheckInTypes tryToCheckIn(VolumeVectorDTO measuredVector) {
         UserDTO current = userProvider.getAuthenticatedUser();
         StudyClassDTO studyClassDTO = studyClassService.getCurrentSubject();
@@ -65,7 +60,7 @@ public class CheckInService {
         return CheckInTypes.NO_CURRENT_CLASS;
     }
 
-    public CheckInService() {
-        mapper = Mappers.getMapper(CheckInMapper.class);
+    public void setDao(CheckInDao dao) {
+        this.dao = dao;
     }
 }

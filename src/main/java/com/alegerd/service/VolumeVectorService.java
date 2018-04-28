@@ -8,6 +8,7 @@ import com.alegerd.model.dto.mappers.VolumeVectorMapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +21,15 @@ public class VolumeVectorService {
 
     private VolumeVectorMapper mapper;
 
+    public VolumeVectorService() {
+        this.mapper = Mappers.getMapper(VolumeVectorMapper.class);
+    }
+
     public void setDao(VolumeVectorDao dao) {
         this.dao = dao;
     }
 
+    @Transactional
     public VolumeVectorDTO getClosestMatch(VolumeVectorDTO volumeVectorDTO) {
         List<VolumeVector> presets = dao.getAll();
 
@@ -71,9 +77,5 @@ public class VolumeVectorService {
         }
         result = Math.sqrt(result);
         return result;
-    }
-
-    public VolumeVectorService() {
-        this.mapper = Mappers.getMapper(VolumeVectorMapper.class);
     }
 }
