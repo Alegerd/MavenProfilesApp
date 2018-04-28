@@ -27,6 +27,8 @@ public class CheckInService {
     @Autowired
     private VolumeVectorService volumeVectorService;
 
+    public enum CheckInTypes{SUCCESS, NO_CURRENT_CLASS, WRONG_ROOM}
+
     public void setDao(CheckInDao dao) {
         this.dao = dao;
     }
@@ -39,7 +41,7 @@ public class CheckInService {
         this.volumeVectorService = volumeVectorService;
     }
 
-    public Boolean tryToCheckIn(VolumeVectorDTO measuredVector) {
+    public CheckInTypes tryToCheckIn(VolumeVectorDTO measuredVector) {
         UserDTO current = userProvider.getAuthenticatedUser();
         StudyClassDTO studyClassDTO = studyClassService.getCurrentSubject();
         if (studyClassDTO != null) {
@@ -55,10 +57,12 @@ public class CheckInService {
 
                 CheckIn checkIn = mapper.toEntity(checkInDTO);
                 dao.create(checkIn);
-                return true;
+                return CheckInTypes.SUCCESS;
             }
+            else
+                return CheckInTypes.WRONG_ROOM;
         }
-        return false;
+        return CheckInTypes.NO_CURRENT_CLASS;
     }
 
     public CheckInService() {
