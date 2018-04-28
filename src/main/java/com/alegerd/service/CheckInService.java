@@ -4,6 +4,7 @@ import com.alegerd.dao.CheckInDao;
 import com.alegerd.model.CheckIn;
 import com.alegerd.model.dto.*;
 import com.alegerd.model.dto.mappers.CheckInMapper;
+import com.alegerd.util.UserProvider;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class CheckInService {
     private CheckInDao dao;
 
     private CheckInMapper mapper;
+
+    @Autowired
+    private UserProvider userProvider;
 
     @Autowired
     private StudyClassService studyClassService;
@@ -35,8 +39,9 @@ public class CheckInService {
         this.volumeVectorService = volumeVectorService;
     }
 
-    public Boolean tryToCheckIn(UserDTO userDTO, VolumeVectorDTO measuredVector) {
-        StudyClassDTO studyClassDTO = studyClassService.getCurrentClassForUser(userDTO);
+    public Boolean tryToCheckIn(VolumeVectorDTO measuredVector) {
+        UserDTO current = userProvider.getAuthenticatedUser();
+        StudyClassDTO studyClassDTO = studyClassService.getCurrentSubject();
         if (studyClassDTO != null) {
             RoomDTO roomDTO = studyClassDTO.getRoom();
 
@@ -45,7 +50,7 @@ public class CheckInService {
                 CheckInDTO checkInDTO = new CheckInDTO();
                 java.util.Date utilDate = new java.util.Date();
                 checkInDTO.setDate(new Date(utilDate.getTime()));
-                checkInDTO.setStudent(userDTO);
+                checkInDTO.setStudent(current);
                 checkInDTO.setStudyClass(studyClassDTO);
 
                 CheckIn checkIn = mapper.toEntity(checkInDTO);
