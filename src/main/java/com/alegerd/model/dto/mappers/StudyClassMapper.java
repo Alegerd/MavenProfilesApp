@@ -1,10 +1,6 @@
 package com.alegerd.model.dto.mappers;
 
-import com.alegerd.model.Group;
-import com.alegerd.model.Measure;
 import com.alegerd.model.StudyClass;
-import com.alegerd.model.dto.GroupDTO;
-import com.alegerd.model.dto.MeasureDTO;
 import com.alegerd.model.dto.StudyClassDTO;
 import org.mapstruct.Mapper;
 

@@ -5,7 +5,7 @@ CREATE TABLE "_user"
     PRIMARY KEY,
   username      VARCHAR(255)     NOT NULL,
   full_name     VARCHAR(255)     NOT NULL,
-  "group"       BIGINT           NOT NULL,
+  _group         BIGINT           NOT NULL,
   role          BIGINT           NOT NULL,
   birthday      DATE             NOT NULL,
   rating        DOUBLE PRECISION NOT NULL,
@@ -26,7 +26,7 @@ ALTER TABLE "_user"
   ADD CONSTRAINT "_user_fk1"
 FOREIGN KEY (role) REFERENCES user_role;
 
-CREATE TABLE "group"
+CREATE TABLE "_group"
 (
   id             SERIAL       NOT NULL
     CONSTRAINT group_pk
@@ -38,7 +38,7 @@ CREATE TABLE "group"
 
 ALTER TABLE "_user"
   ADD CONSTRAINT "_user_fk0"
-FOREIGN KEY ("group") REFERENCES "group";
+FOREIGN KEY (_group) REFERENCES "_group";
 
 CREATE TABLE room
 (
@@ -59,14 +59,22 @@ CREATE TABLE subject
 CREATE TABLE department
 (
   id   SERIAL       NOT NULL
-    CONSTRAINT depatment_pk
+    CONSTRAINT department_pk
     PRIMARY KEY,
   name VARCHAR(255) NOT NULL
 );
 
-ALTER TABLE "group"
+ALTER TABLE "_group"
   ADD CONSTRAINT group_fk0
 FOREIGN KEY (department) REFERENCES department;
+
+CREATE TABLE week_day
+(
+  id   SERIAL       NOT NULL
+    CONSTRAINT week_day_pk
+    PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE study_class
 (
@@ -83,7 +91,7 @@ CREATE TABLE study_class
     CONSTRAINT study_class_fk2
     REFERENCES room,
   start       TIME    NOT NULL,
-  "end"       TIME    NOT NULL,
+  finish      TIME    NOT NULL,
   periodicity INTEGER NOT NULL
 );
 
@@ -97,7 +105,20 @@ CREATE TABLE group_in_study_class
     REFERENCES study_class,
   group_id       BIGINT NOT NULL
     CONSTRAINT group_in_study_class_fk1
-    REFERENCES "group"
+    REFERENCES "_group"
+);
+
+CREATE TABLE study_class_in_week_day
+(
+  id             SERIAL NOT NULL
+    CONSTRAINT study_class_in_week_day_pk
+    PRIMARY KEY,
+  study_class_id BIGINT NOT NULL
+    CONSTRAINT study_class_in_week_day_fk0
+    REFERENCES study_class,
+  week_day_id       BIGINT NOT NULL
+    CONSTRAINT study_class_in_week_day_fk1
+    REFERENCES week_day
 );
 
 CREATE TABLE measure

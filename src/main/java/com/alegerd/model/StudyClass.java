@@ -27,7 +27,7 @@ public class StudyClass {
     @Column(name = "start")
     private Time start;
 
-    @Column(name = "end")
+    @Column(name = "finish")
     private Time end;
 
     @Column(name = "periodicity")
@@ -44,7 +44,20 @@ public class StudyClass {
             joinColumns = @JoinColumn(name = "study_class_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    private Collection<Group> groups;
+    private Collection<GroupEntity> groups;
+
+    @ManyToMany(
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            fetch = FetchType.LAZY
+    )
+    @JoinTable(name = "study_class_in_week_day",
+            joinColumns = @JoinColumn(name = "study_class_id"),
+            inverseJoinColumns = @JoinColumn(name = "week_day_id")
+    )
+    private Collection<WeekDay> days;
 
     public Long getId() {
         return id;
@@ -102,11 +115,11 @@ public class StudyClass {
         this.periodicity = periodicity;
     }
 
-    public Collection<Group> getGroups() {
+    public Collection<GroupEntity> getGroups() {
         return groups;
     }
 
-    public void setGroups(Collection<Group> groups) {
+    public void setGroups(Collection<GroupEntity> groups) {
         this.groups = groups;
     }
 
