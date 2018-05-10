@@ -19,7 +19,8 @@ public class VolumeVector {
     @Column(name = "date")
     private Date date;
 
-    @OneToMany(mappedBy = "volumeVector")
+    @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "volumeVector")
+    @Column(nullable = false)
     private Collection<Measure> measures;
 
     public Long getId() {

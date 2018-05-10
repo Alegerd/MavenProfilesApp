@@ -16,13 +16,16 @@ public class RoomService {
 
     private RoomMapper mapper;
 
-    public RoomService(){
+    public RoomService() {
         mapper = Mappers.getMapper(RoomMapper.class);
     }
 
-    public RoomDTO getRoomByName(String name){
+    public RoomDTO getRoomByName(String name) {
         Room entity = dao.getRoomByName(name);
-        return mapper.toDto(entity);
+        if (entity != null)
+            return mapper.toDto(entity);
+        else
+            return null;
     }
 
     public void setDao(RoomDao dao) {

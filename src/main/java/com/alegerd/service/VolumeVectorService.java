@@ -1,8 +1,10 @@
 package com.alegerd.service;
 
 import com.alegerd.dao.VolumeVectorDao;
+import com.alegerd.model.Measure;
 import com.alegerd.model.VolumeVector;
 import com.alegerd.model.dto.MeasureDTO;
+import com.alegerd.model.dto.RoomDTO;
 import com.alegerd.model.dto.VolumeVectorDTO;
 import com.alegerd.model.dto.mappers.VolumeVectorMapper;
 import org.mapstruct.factory.Mappers;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +23,9 @@ public class VolumeVectorService {
     private VolumeVectorDao dao;
 
     private VolumeVectorMapper mapper;
+
+    @Autowired
+    private RoomService roomService;
 
     public VolumeVectorService() {
         this.mapper = Mappers.getMapper(VolumeVectorMapper.class);
@@ -41,14 +47,29 @@ public class VolumeVectorService {
             VolumeVectorDTO differenceVector = substractVectors(volumeVectorDTO, presetDTO);
             if (differenceVector.getMeasures().size() > 0) {
                 double difference = getVectorLength(differenceVector);
-                if (difference < minDifference || closestMatch == null){
-                    minDifference=difference;
-                    closestMatch=presetDTO;
+                if (difference < minDifference || closestMatch == null) {
+                    minDifference = difference;
+                    closestMatch = presetDTO;
                 }
             }
         }
 
         return closestMatch;
+    }
+
+    @Transactional
+    public void saveMeasures(VolumeVectorDTO volumeVectorDTO, String room) throws Exception {
+        RoomDTO roomDTO = roomService.getRoomByName(room);
+        if (roomDTO != null) {
+            volumeVectorDTO.setRoom(roomDTO);
+            java.util.Date utilDate = new java.util.Date();
+            volumeVectorDTO.setDate(new Date(utilDate.getTime()));
+            VolumeVector volumeVector = mapper.toEntity(volumeVectorDTO);
+            for (Measure measure : volumeVector.getMeasures()) {
+                measure.setVolumeVector(volumeVector);
+            }
+            dao.create(volumeVector);
+        } else throw new Exception("No such room");
     }
 
     private VolumeVectorDTO substractVectors(VolumeVectorDTO v1, VolumeVectorDTO v2) {
