@@ -1,5 +1,7 @@
 package com.alegerd.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -10,14 +12,14 @@ public class Measure {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="routerId")
+    @Column(name="router_id")
     private String routerId;
 
     @Column(name="volume")
     private Double volume;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="volume_vector_id")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="volume_vector_id", nullable = false)
     private VolumeVector volumeVector;
 
     public Long getId() {

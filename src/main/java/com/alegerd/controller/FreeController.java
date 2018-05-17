@@ -9,6 +9,7 @@ import com.alegerd.service.GroupService;
 import com.alegerd.service.StudyClassService;
 import com.alegerd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -51,6 +52,12 @@ public class FreeController {
         return ResponseEntity.ok().build();
     }
     */
+
+
+    @RequestMapping(value = "/kek", method = RequestMethod.POST)
+    public void kek(RequestEntity requestEntity){
+       String s = requestEntity.toString();
+    }
 
     @RequestMapping(value = "/gasidoc", method = RequestMethod.GET)
     @ResponseBody

@@ -126,7 +126,7 @@ CREATE TABLE measure
   id               SERIAL           NOT NULL
     CONSTRAINT measure_pk
     PRIMARY KEY,
-  "routerId"       VARCHAR(255)     NOT NULL,
+  "router_id"       VARCHAR(255)     NOT NULL,
   volume           DOUBLE PRECISION NOT NULL,
   volume_vector_id BIGINT           NOT NULL
 );

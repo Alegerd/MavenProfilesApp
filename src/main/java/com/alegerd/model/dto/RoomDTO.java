@@ -1,5 +1,7 @@
 package com.alegerd.model.dto;
 
+import java.util.Objects;
+
 public class RoomDTO {
 
     private Long id;
@@ -28,5 +30,20 @@ public class RoomDTO {
     public RoomDTO(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RoomDTO roomDTO = (RoomDTO) o;
+        return Objects.equals(id, roomDTO.id) &&
+                Objects.equals(name, roomDTO.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, name);
     }
 }

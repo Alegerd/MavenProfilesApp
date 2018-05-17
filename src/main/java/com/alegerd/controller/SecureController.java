@@ -7,6 +7,7 @@ import com.alegerd.model.dto.StudyClassDTO;
 import com.alegerd.model.dto.UserDTO;
 import com.alegerd.model.dto.VolumeVectorDTO;
 import com.alegerd.service.*;
+import com.sun.istack.internal.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,9 @@ public class SecureController {
     private StudyClassService studyClassService;
 
     @Autowired
+    private VolumeVectorService volumeVectorService;
+
+    @Autowired
     CheckInService checkInService;
 
     @RequestMapping(value = "/currentUser", method = RequestMethod.GET)
@@ -45,6 +49,18 @@ public class SecureController {
     @ResponseBody
     public List<StudyClassDTO> getSubjectsForTodayForCurrentUser() {
         return studyClassService.getSubjectsForTodayForCurrentUser();
+    }
+
+    @RequestMapping(value = "/whereami", method = RequestMethod.POST)
+    @ResponseBody
+    public RoomDTO whereAmI(@RequestBody VolumeVectorDTO measuredVector) {
+        VolumeVectorDTO volumeVectorDTO = volumeVectorService.getClosestMatch(measuredVector);
+        if(volumeVectorDTO!=null) {
+            RoomDTO roomDTO = volumeVectorDTO.getRoom();
+            return roomDTO;
+        }
+        else
+            return null;
     }
 
     @RequestMapping(value = "/checkIn", method = RequestMethod.POST)
@@ -63,10 +79,25 @@ public class SecureController {
         return ResponseEntity.badRequest().build();
     }
 
+    @RequestMapping(value = "/savemeasures/{room}/", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity saveMeasures(@PathVariable String room, @RequestBody VolumeVectorDTO measuredVector) {
+        try {
+            volumeVectorService.saveMeasures(measuredVector, room);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     @RequestMapping(value = "/gcs", method = RequestMethod.GET)
     @ResponseBody
-    public StudyClassDTO getCurrentSubject() {
-        return studyClassService.getCurrentSubject();
+    public ResponseEntity<?> getCurrentSubject() {
+        StudyClassDTO dto = studyClassService.getCurrentSubject();
+        if (dto != null)
+            return ResponseEntity.ok(dto);
+        else
+            return ResponseEntity.badRequest().build();
     }
 
 }
