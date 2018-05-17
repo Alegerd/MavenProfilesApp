@@ -14,7 +14,7 @@ INSERT INTO user_role(id, name) VALUES (1, 'ROLE_USER'),(2, 'ROLE_ADMIN');
 
 INSERT INTO _user(username, full_name, _group, role, birthday, rating, personal_info, contacts, password) VALUES
   ('Alegerd', 'Алексей Герасимов', 5, 1, '1997-10-20 12:00:00', 10, 'lol', '89065897608', 'qwerty123'),
-  ('Splav', 'Сергей Рузин', 1, 1, '1997-10-20 12:00:00', 7, 'lol', 'none', 'qwerty123'),
+  ('Splav', 'Сергей Рузинн', 1, 1, '1997-10-20 12:00:00', 7, 'lol', 'none', 'qwerty123'),
   ('Chern', 'Павел Чернышов', 5, 1, '1997-10-20 12:00:00', 10, 'lol', 'none', 'qwerty123'),
   ('Tutel', 'Максим Тутэльян', 5, 1, '1997-10-20 12:00:00', 9, 'lol', 'none', 'qwerty123'),
   ('Valleyball', 'Никита Лукин', 1, 1, '1997-10-20 12:00:00', 8, 'lol', 'none', 'qwerty123'),
