@@ -25,9 +25,9 @@
 
     <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/UsersData"/>
-        <property name="username" value="postgres"/>
-        <property name="password" value="root"/>
+        <property name="url" value="jdbc:postgresql://ec2-79-125-14-195.eu-west-1.compute.amazonaws.com:5432/d88vrcapabof0k"/>
+        <property name="username" value="jjsqyelyahkzkm"/>
+        <property name="password" value="547508db62f89fa34734b1d69e1057f730e40ad55a9ac3f90a623c36633cc2f0"/>
     </bean>
 
     <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">

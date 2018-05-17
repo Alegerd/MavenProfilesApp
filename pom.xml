@@ -195,9 +195,9 @@
                         <artifactId>flyway-maven-plugin</artifactId>
                         <version>4.2.0</version>
                         <configuration>
-                            <user>postgres</user>
-                            <password>root</password>
-                            <url>jdbc:postgresql://localhost:5432/UsersData</url>
+                            <user>jjsqyelyahkzkm</user>
+                            <password>547508db62f89fa34734b1d69e1057f730e40ad55a9ac3f90a623c36633cc2f0</password>
+                            <url>jdbc:postgresql://ec2-79-125-14-195.eu-west-1.compute.amazonaws.com:5432/d88vrcapabof0k</url>
                             <locations>
                                 <location>filesystem:src/main/resources/META-INF/sql/</location>
                             </locations>
@@ -215,5 +215,38 @@
             </dependencies>
 
         </profile>
+    <profile>
+        <id>Heroku</id>
+
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.0.2</version>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals><goal>copy</goal></goals>
+                            <configuration>
+                                <artifactItems>
+                                    <artifactItem>
+                                        <groupId>com.github.jsimone</groupId>
+                                        <artifactId>webapp-runner</artifactId>
+                                        <version>8.5.31.0</version>
+                                        <destFileName>webapp-runner.jar</destFileName>
+                                    </artifactItem>
+                                </artifactItems>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
     </profiles>
 </project>
