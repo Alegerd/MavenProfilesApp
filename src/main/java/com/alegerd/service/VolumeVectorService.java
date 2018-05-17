@@ -21,14 +21,18 @@ public class VolumeVectorService {
 
     @Autowired
     private VolumeVectorDao dao;
-
     private VolumeVectorMapper mapper;
-
     @Autowired
     private RoomService roomService;
 
+    private List<String> permittedRouters;
+
     public VolumeVectorService() {
         this.mapper = Mappers.getMapper(VolumeVectorMapper.class);
+        permittedRouters = new ArrayList<>();
+        permittedRouters.add("e4:18:6b:3a:53:dc");
+        permittedRouters.add("84:16:f9:2f:b9:98");
+        permittedRouters.add("e4:18:6b:0e:2a:c4");
     }
 
     public void setDao(VolumeVectorDao dao) {
@@ -77,14 +81,16 @@ public class VolumeVectorService {
         List<MeasureDTO> measures = new ArrayList<>();
 
         for (MeasureDTO m1 : v1.getMeasures()) {
-            for (MeasureDTO m2 : v2.getMeasures()) {
-                if (m1.getRouterId().equals(m2.getRouterId())) {
-                    MeasureDTO measureDTO = new MeasureDTO();
-                    measureDTO.setRouterId(m1.getRouterId());
-                    measureDTO.setVolume(m1.getVolume() - m2.getVolume());
-                    measures.add(measureDTO);
+            //if (permittedRouters.contains(m1.getRouterId())) {
+                for (MeasureDTO m2 : v2.getMeasures()) {
+                    if (m1.getRouterId().equals(m2.getRouterId())) {
+                        MeasureDTO measureDTO = new MeasureDTO();
+                        measureDTO.setRouterId(m1.getRouterId());
+                        measureDTO.setVolume(m1.getVolume() - m2.getVolume());
+                        measures.add(measureDTO);
+                    }
                 }
-            }
+            //}
         }
         result.setMeasures(measures);
 
