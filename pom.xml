@@ -162,7 +162,7 @@
 
     <profiles>
         <profile>
-            <id>PostgreSQL</id>
+            <id>Heroku</id>
 
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -176,6 +176,28 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>3.0.2</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals><goal>copy</goal></goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>com.github.jsimone</groupId>
+                                            <artifactId>webapp-runner</artifactId>
+                                            <version>8.5.31.0</version>
+                                            <destFileName>webapp-runner.jar</destFileName>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <version>3.1</version>
                         <configuration>
@@ -183,6 +205,7 @@
                             <target>1.8</target>
                         </configuration>
                     </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
@@ -190,6 +213,7 @@
                             <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                         </configuration>
                     </plugin>
+
                     <plugin>
                         <groupId>org.flywaydb</groupId>
                         <artifactId>flyway-maven-plugin</artifactId>
@@ -215,38 +239,5 @@
             </dependencies>
 
         </profile>
-    <profile>
-        <id>Heroku</id>
-
-        <activation>
-            <activeByDefault>true</activeByDefault>
-        </activation>
-
-        <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.0.2</version>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals><goal>copy</goal></goals>
-                            <configuration>
-                                <artifactItems>
-                                    <artifactItem>
-                                        <groupId>com.github.jsimone</groupId>
-                                        <artifactId>webapp-runner</artifactId>
-                                        <version>8.5.31.0</version>
-                                        <destFileName>webapp-runner.jar</destFileName>
-                                    </artifactItem>
-                                </artifactItems>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-            </plugins>
-        </build>
-    </profile>
     </profiles>
 </project>
