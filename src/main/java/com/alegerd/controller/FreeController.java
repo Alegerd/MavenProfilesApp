@@ -1,16 +1,11 @@
 package com.alegerd.controller;
 
-import com.alegerd.exceptions.UserAlreadySinedInException;
-import com.alegerd.exceptions.WrongLoginException;
-import com.alegerd.model.dto.RoomDTO;
-import com.alegerd.model.dto.StudyClassDTO;
 import com.alegerd.model.dto.UserDTO;
 import com.alegerd.service.GroupService;
 import com.alegerd.service.StudyClassService;
 import com.alegerd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 

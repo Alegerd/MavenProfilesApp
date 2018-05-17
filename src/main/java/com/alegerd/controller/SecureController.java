@@ -1,23 +1,18 @@
 package com.alegerd.controller;
 
 import com.alegerd.exceptions.WrongLoginException;
-import com.alegerd.model.StudyClass;
 import com.alegerd.model.dto.RoomDTO;
 import com.alegerd.model.dto.StudyClassDTO;
 import com.alegerd.model.dto.UserDTO;
 import com.alegerd.model.dto.VolumeVectorDTO;
 import com.alegerd.service.*;
-import com.sun.istack.internal.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
-
-import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 @EnableWebMvc
