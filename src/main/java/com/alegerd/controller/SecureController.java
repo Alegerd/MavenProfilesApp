@@ -39,7 +39,6 @@ public class SecureController {
     public UserDTO getCurrentUser() throws WrongLoginException {
         return userService.getCurrentUser();
     }
-
     @RequestMapping(value = "/gsft", method = RequestMethod.GET)
     @ResponseBody
     public List<StudyClassDTO> getSubjectsForTodayForCurrentUser() {
